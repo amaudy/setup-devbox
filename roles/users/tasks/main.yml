@@ -1,0 +1,17 @@
+---
+- name: Create users with home directory
+  user: name={{ item.username }} shell=/bin/bash createhome=yes comment='Created by Ansible'
+  with_items: '{{users}}'
+
+- name: Creates directory
+  file:
+    path: /home/{{ item.username }}/.ssh
+    state: directory
+    owner: "{{ item.username }}"
+    group: "{{ item.username }}"
+  with_items: '{{users}}'
+
+- name: Setup | authorized key upload
+  authorized_key: user={{ item.username }}
+    key="{{item.public_key}}"
+  with_items: '{{users}}'

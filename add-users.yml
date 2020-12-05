@@ -1,0 +1,8 @@
+---
+- hosts: "*"
+  become: true
+  vars_files:
+    - vars/default.yml
+  roles:
+    - locale
+    - users

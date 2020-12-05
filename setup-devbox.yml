@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  vars_files:
+    - vars/default.yml
+
+  roles:
+    - locale
+    - apt-upgrade
+    - users
+    - copy-developer-keys
+    - install-docker

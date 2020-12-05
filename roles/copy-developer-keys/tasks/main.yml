@@ -1,0 +1,14 @@
+---
+- name: Sync private key
+  synchronize:
+    src: "developer-keys/{{ item.username }}/"
+    dest: "/home/{{ item.username }}/.ssh"
+  with_items: "{{ users }}"
+
+- name: Ensure owner and group are correct.
+  file:
+    dest: "/home/{{ item.username }}/.ssh"
+    owner: "{{ item.username }}"
+    group: "{{ item.username }}"
+    recurse: yes
+  with_items: "{{ users }}"

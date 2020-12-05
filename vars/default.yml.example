@@ -1,0 +1,9 @@
+---
+config_system_locale: 'en_US.UTF-8'
+config_system_language: 'en_US.UTF-8'
+
+
+users:
+  - username: developer
+    public_key: "xxx"
+    use_sudo: yes
