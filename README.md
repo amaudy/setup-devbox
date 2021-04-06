@@ -24,3 +24,8 @@ If `sudo` need password
 ```
 ansible-playbook -i hosts setup-devbox.yml --extra-vars "ansible_sudo_pass=your_sudo_password"
 ```
+
+
+## Terraform
+
+- Slug for instance type https://slugs.do-api.dev
