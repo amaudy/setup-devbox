@@ -3,7 +3,7 @@ resource "digitalocean_droplet" "web" {
   image  = "ubuntu-20-04-x64"
   name   = "devbox-${count.index}"
   region = "sgp1"
-  size   = "s-2vcpu-2gb-intel"
+  size   = "s-2vcpu-4gb"
 
   ssh_keys = [
       data.digitalocean_ssh_key.terraform.id
