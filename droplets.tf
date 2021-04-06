@@ -1,7 +1,6 @@
 resource "digitalocean_droplet" "web" {
-  count  = 1
   image  = "ubuntu-20-04-x64"
-  name   = "devbox-${count.index}"
+  name   = "devbox"
   region = "sgp1"
   size   = "s-2vcpu-4gb"
   tags   = [ "devbox" ]
@@ -28,9 +27,43 @@ resource "digitalocean_droplet" "web" {
   }
 }
 
+
+resource "digitalocean_firewall" "web" {
+  name = "devbox-firewall"
+
+  droplet_ids = [digitalocean_droplet.web.id]
+
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "22"
+    source_addresses = ["159.192.0.0/16"]
+  }
+
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "80"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "443"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  inbound_rule {
+    protocol         = "icmp"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  outbound_rule {
+    protocol              = "icmp"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+}
+
 output "droplet_ip_addresses" {
   value = {
-    for droplet in digitalocean_droplet.web:
-    droplet.name => droplet.ipv4_address
+    "Your Development machine IP is:" = digitalocean_droplet.web.ipv4_address
   }
 }
