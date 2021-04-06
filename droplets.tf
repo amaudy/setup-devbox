@@ -4,6 +4,7 @@ resource "digitalocean_droplet" "web" {
   name   = "devbox-${count.index}"
   region = "sgp1"
   size   = "s-2vcpu-4gb"
+  tags   = [ "devbox" ]
 
   ssh_keys = [
       data.digitalocean_ssh_key.terraform.id
