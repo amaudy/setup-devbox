@@ -1,0 +1,15 @@
+---
+# https://repos.insights.digitalocean.com/sonar-agent.asc
+- name: Add key from Digitalocean
+  apt_key:
+    url: "https://repos.insights.digitalocean.com/sonar-agent.asc"
+    state: present
+
+- name: Add DigitalOcean Apt Repository
+  apt_repository:
+    repo: deb https://repos.insights.digitalocean.com/apt/do-agent/ main main
+    filename: "digitalocean-agent"
+    state: present
+
+- name: Install DigitalOcean Metric Agent
+  apt: update_cache=yes name=do-agent state=present

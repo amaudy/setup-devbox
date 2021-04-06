@@ -5,9 +5,4 @@
     - vars/default.yml
 
   roles:
-    - locale
     - do-agent
-    - apt-upgrade
-    - users
-    - copy-developer-keys
-    - install-docker
