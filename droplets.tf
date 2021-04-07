@@ -27,6 +27,9 @@ resource "digitalocean_droplet" "web" {
   }
 }
 
+data "http" "myip" {
+  url = "http://ipv4.icanhazip.com"
+}
 
 resource "digitalocean_firewall" "web" {
   name = "devbox-firewall"
@@ -35,25 +38,8 @@ resource "digitalocean_firewall" "web" {
 
   inbound_rule {
     protocol         = "tcp"
-    port_range       = "22"
-    source_addresses = ["159.192.0.0/16"]
-  }
-
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "80"
-    source_addresses = ["0.0.0.0/0", "::/0"]
-  }
-
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "443"
-    source_addresses = ["0.0.0.0/0", "::/0"]
-  }
-
-  inbound_rule {
-    protocol         = "icmp"
-    source_addresses = ["0.0.0.0/0", "::/0"]
+    port_range       = "1-65535"
+    source_addresses = ["${chomp(data.http.myip.body)}/32"]
   }
 
   outbound_rule {
