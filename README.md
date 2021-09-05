@@ -1,16 +1,23 @@
-# Setup Development box on Ubuntu 20.04
+# Setup Development box on Ubuntu 20.04 at DigitalOcean
 
-Automate create Linux users, copy private key and install Docker/Docker compose at remote server.
+## Why?
 
-Purpose for quick setup development box.
+Due of my MacbookAir 2012 can not use Docker. I have to off load my development environment to other machine.
+
 
 ## How to use this repository?
 
-After clone to your machine
+* Create DigitalOcean Personal Token
+* Prepare configuration
 
-- Make sure you can ssh to target server
-- Copy `hosts.example` to `hosts` and put IP address
-- Copy `vars/default.yml.ecample` to `vars/default.yml`
+
+## Run Terraform
+
+*The public key must password free, private key with keyphase will not work with Terraform*
+
+```bash
+terraform apply -var "do_token=${DO_PAT}" -var "pvt_key=$HOME/user/.ssh/id_ed25519" -var "pub_key=$HOME/user/.ssh/id_ed25519.pub"
+```
 
 
 ### Run Ansible Playbook
