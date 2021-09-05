@@ -16,6 +16,10 @@ Due of my MacbookAir 2012 can not use Docker. I have to off load my development 
 *The public key must password free, private key with keyphase will not work with Terraform*
 
 ```bash
+terraform init
+```
+
+```bash
 terraform apply -var "do_token=${DO_PAT}" -var "pvt_key=$HOME/user/.ssh/id_ed25519" -var "pub_key=$HOME/user/.ssh/id_ed25519.pub"
 ```
 
