@@ -1,0 +1,6 @@
+---
+- name: Mod user group {{ item.username }}
+  user: name={{ item.username }}
+        groups=docker
+        append=yes
+  with_items: '{{users}}'

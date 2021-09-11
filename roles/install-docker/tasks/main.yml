@@ -21,9 +21,3 @@
     url : https://github.com/docker/compose/releases/download/1.28.5/docker-compose-Linux-x86_64
     dest: /usr/local/bin/docker-compose
     mode: '755'
-
-- name: Mod user group {{ item.username }}
-  user: name={{ item.username }}
-        groups=docker
-        append=yes
-  with_items: '{{users}}'

@@ -11,3 +11,4 @@
     - users
     - copy-developer-keys
     - install-docker
+    - docker-permission

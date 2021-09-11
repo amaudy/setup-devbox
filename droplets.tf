@@ -1,6 +1,6 @@
-resource "digitalocean_droplet" "web" {
+resource "digitalocean_droplet" "web_devbox" {
   image  = "ubuntu-20-04-x64"
-  name   = "devbox"
+  name   = "webdevbox"
   region = "sgp1"
   size   = "s-2vcpu-4gb"
   tags   = [ "devbox" ]
@@ -31,10 +31,10 @@ data "http" "myip" {
   url = "http://ipv4.icanhazip.com"
 }
 
-resource "digitalocean_firewall" "web" {
-  name = "devbox-firewall"
+resource "digitalocean_firewall" "web_devbox" {
+  name = "webdevbox-firewall"
 
-  droplet_ids = [digitalocean_droplet.web.id]
+  droplet_ids = [digitalocean_droplet.web_devbox.id]
 
   inbound_rule {
     protocol         = "tcp"
@@ -63,6 +63,6 @@ resource "digitalocean_firewall" "web" {
 
 output "droplet_ip_addresses" {
   value = {
-    "Your Development machine IP is:" = digitalocean_droplet.web.ipv4_address
+    "Your Development machine IP is:" = digitalocean_droplet.web_devbox.ipv4_address
   }
 }
