@@ -1,0 +1,14 @@
+---
+- name: Modify User use zsh as default shell
+  ansible.builtin.command: usermod --shell /bin/zsh {{ item.username }}
+  with_items: '{{users}}'
+
+# TODO: Install oh-my-zsh the apply this task
+# - name: Copy .zshrc to server for all users
+#   ansible.builtin.copy:
+#     src: zshrc
+#     dest: /home/{{ item.username }}/.zshrc
+#     owner: "{{ item.username }}"
+#     group: "{{ item.username }}"
+#     mode: '0644'
+#   with_items: "{{ users }}"
