@@ -7,8 +7,8 @@ Due of my MacbookAir 2012 can not use Docker. I have to off load my development 
 
 ## How to use this repository?
 
-* Create DigitalOcean Personal Token
-* Prepare configuration
+* [Create DigitalOcean Personal Token](https://cloud.digitalocean.com/account/api/tokens)
+* Prepare configuration (developer key, ssh public key for Terraform)
 
 
 ## Run Terraform
